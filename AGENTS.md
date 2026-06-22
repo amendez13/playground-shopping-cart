@@ -32,6 +32,28 @@ This repository is a playground for learning and comparing microservice implemen
 - For performance experiments, record enough context to explain the result: service version, container config, ECS/Fargate configuration, workload shape, dataset, and metric window.
 - Terraform should be modular enough to support multiple experiment environments without duplicating entire stacks.
 
+## Development Workflow
+
+Every change should go through a pull request before it is merged into `main`.
+
+Expected workflow:
+
+- Create a focused branch for each change.
+- Keep each pull request scoped to one coherent feature, fix, experiment, or documentation update.
+- Open a pull request for review instead of pushing directly to `main`.
+- Run the relevant local checks before requesting review.
+- When CI exists, every required CI check must pass before merge.
+- Until CI is implemented, use manual review or AI-assisted review as the required quality gate.
+- Address review feedback in the pull request branch.
+- Merge only after review approval and passing checks, or after explicit approval to merge despite known limitations.
+
+Pull request descriptions should include:
+
+- What changed.
+- Why it changed.
+- How it was validated.
+- Any follow-up work, known limitations, or skipped checks.
+
 ## Frontend Stack Decision
 
 Use React with Vite and TypeScript for the common frontend unless a later decision record explicitly changes this.
