@@ -1,6 +1,12 @@
 # Frontend
 
-The frontend is a React, Vite, and TypeScript application for browsing the seeded software engineering book catalog, exercising local cart interactions, and previewing simulator demand weights.
+The frontend is a React, Vite, and TypeScript application for browsing the seeded software engineering book catalog, exercising cart interactions, viewing customer order history, and previewing store-owner operations.
+
+Current runtime behavior:
+
+- Customer view: catalog, sign-in/sign-up screens, guest cart fallback, saved-cart state after sign-in, order history, and order detail.
+- Store-owner view: order queue, inventory alerts, and simulator demand weights.
+- Backend integration: pending cart-service authentication, cart, and order APIs.
 
 ## Local Development
 
@@ -47,4 +53,4 @@ Use the production image built by `frontend/Dockerfile` for ECS. The expected co
 - Health check path: `/health`
 - Health check command: `wget -qO- http://127.0.0.1:8080/health >/dev/null || exit 1`
 
-The first version is a static UI backed by the seed catalog at build time. When the cart service API exists, add an environment-specific API base URL and route catalog/cart actions through that service.
+The first version is a static UI backed by the seed catalog at build time. When the cart service API exists, add an environment-specific API base URL and route auth, catalog, cart, checkout, order, and store-owner actions through that service.

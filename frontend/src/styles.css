@@ -85,6 +85,56 @@ h1 {
   white-space: nowrap;
 }
 
+.topActions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.segmentedControl,
+.viewTabs {
+  background: #e4e7eb;
+  border: 1px solid #bcccdc;
+  border-radius: 8px;
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+}
+
+.segmentedControl button,
+.viewTabs button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: #334e68;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
+.segmentedControl .activeSegment,
+.viewTabs .activeTab {
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgb(16 42 67 / 0.08);
+  color: #102a43;
+}
+
+.segmentedControl.compact {
+  display: flex;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.segmentedControl.compact button {
+  flex: 1;
+  justify-content: center;
+}
+
 .metricGrid {
   display: grid;
   gap: 12px;
@@ -94,7 +144,11 @@ h1 {
 .metricCard,
 .bookCard,
 .cartPanel,
-.simulatorPanel {
+.simulatorPanel,
+.authPanel,
+.orderList,
+.orderDetail,
+.ownerPanel {
   background: #ffffff;
   border: 1px solid #d9e2ec;
   border-radius: 8px;
@@ -133,6 +187,20 @@ h1 {
   grid-template-columns: minmax(0, 1fr) 360px;
 }
 
+.viewTabs {
+  align-self: flex-start;
+}
+
+.ownerWorkspace {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+}
+
+.ownerWorkspace .ownerPanel:last-child {
+  grid-column: 1 / -1;
+}
+
 .catalogPanel {
   min-width: 0;
 }
@@ -164,6 +232,27 @@ h1 {
   flex: 1;
   min-width: 0;
   outline: 0;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field span {
+  color: #334e68;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.field input {
+  background: #ffffff;
+  border: 1px solid #bcccdc;
+  border-radius: 8px;
+  color: #102a43;
+  min-height: 42px;
+  outline: 0;
+  padding: 8px 10px;
 }
 
 .categoryTabs {
@@ -321,7 +410,11 @@ h1 {
 }
 
 .cartPanel,
-.simulatorPanel {
+.simulatorPanel,
+.authPanel,
+.ownerPanel,
+.orderList,
+.orderDetail {
   padding: 18px;
 }
 
@@ -329,6 +422,76 @@ h1 {
   color: #102a43;
   font-size: 1.05rem;
   margin-bottom: 0;
+}
+
+.sectionHeading {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.sectionHeading h2 {
+  color: #102a43;
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+.sectionHeading p {
+  color: #52606d;
+  margin-bottom: 0;
+}
+
+.sectionHeading span,
+.statusPill {
+  background: #f0f4f8;
+  border-radius: 999px;
+  color: #486581;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.accountEmail {
+  color: #52606d;
+  margin: 8px 0 16px;
+  overflow-wrap: anywhere;
+}
+
+.formGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.primaryButton,
+.secondaryButton {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 8px;
+  justify-content: center;
+  min-height: 42px;
+  padding: 9px 12px;
+}
+
+.primaryButton {
+  background: #0b7285;
+  border: 1px solid #0b7285;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  border: 1px solid #bcccdc;
+  color: #334e68;
+}
+
+.fullWidth {
+  margin-top: 14px;
+  width: 100%;
 }
 
 .emptyState {
@@ -381,6 +544,155 @@ h1 {
   border-top: 1px solid #d9e2ec;
   margin-top: 16px;
   padding-top: 16px;
+}
+
+.orderWorkspace {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-width: 0;
+}
+
+.orderList {
+  align-self: start;
+}
+
+.orderButton {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  color: #334e68;
+  display: grid;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.orderButton span,
+.orderButton strong {
+  color: #102a43;
+}
+
+.orderButton small {
+  color: #52606d;
+}
+
+.orderButton.activeOrder {
+  border-color: #0b7285;
+  box-shadow: inset 3px 0 0 #0b7285;
+}
+
+.detailGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 20px;
+}
+
+.detailGrid div {
+  background: #f0f4f8;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.detailLabel {
+  color: #52606d;
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.lineTable {
+  border: 1px solid #e4e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lineRow,
+.ownerOrderRow,
+.inventoryRow {
+  align-items: center;
+  border-bottom: 1px solid #e4e7eb;
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.lineRow {
+  grid-template-columns: minmax(0, 1fr) 42px 90px;
+}
+
+.lineRow:last-child,
+.ownerOrderRow:last-child,
+.inventoryRow:last-child {
+  border-bottom: 0;
+}
+
+.lineRow span,
+.ownerOrderRow span,
+.inventoryRow span {
+  color: #52606d;
+}
+
+.lineRow strong {
+  color: #102a43;
+  text-align: right;
+}
+
+.statusTimeline {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.timelineEvent {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 12px minmax(0, 1fr);
+}
+
+.timelineEvent > span {
+  background: #0b7285;
+  border-radius: 999px;
+  height: 10px;
+  margin-top: 7px;
+  width: 10px;
+}
+
+.timelineEvent strong {
+  color: #102a43;
+  display: block;
+}
+
+.timelineEvent small {
+  color: #52606d;
+}
+
+.ownerOrderRows,
+.inventoryRows {
+  display: grid;
+}
+
+.ownerOrderRow {
+  grid-template-columns: minmax(0, 1fr) 110px 90px;
+}
+
+.ownerOrderRow div,
+.inventoryRow div {
+  display: grid;
+  min-width: 0;
+}
+
+.ownerOrderRow strong,
+.inventoryRow strong {
+  color: #102a43;
+}
+
+.inventoryRow {
+  grid-template-columns: minmax(0, 1fr) 70px 44px;
 }
 
 .weightList {
@@ -437,6 +749,11 @@ meter {
     grid-template-columns: 1fr;
   }
 
+  .ownerWorkspace,
+  .orderWorkspace {
+    grid-template-columns: 1fr;
+  }
+
   .sidePanel {
     position: static;
   }
@@ -456,9 +773,32 @@ meter {
     flex-direction: column;
   }
 
+  .topActions,
+  .segmentedControl,
+  .viewTabs {
+    width: 100%;
+  }
+
+  .segmentedControl button,
+  .viewTabs button {
+    flex: 1;
+    justify-content: center;
+  }
+
   .metricGrid,
   .bookGrid {
     grid-template-columns: 1fr;
+  }
+
+  .detailGrid,
+  .lineRow,
+  .ownerOrderRow,
+  .inventoryRow {
+    grid-template-columns: 1fr;
+  }
+
+  .lineRow strong {
+    text-align: left;
   }
 
   .resultSummary {

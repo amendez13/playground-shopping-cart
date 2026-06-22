@@ -22,9 +22,9 @@ Playground Shopping Cart is an experimental microservices project for comparing 
 - `experiments/`: Workloads, scenarios, raw results, and analysis notebooks or scripts.
 - `docs/`: Design notes, architecture decisions, and operating guides.
 
-The initial store catalog is defined in `docs/store.md`. A PostgreSQL seed backup for that catalog is documented in `docs/postgres-seed-backup.md`.
+The initial store catalog is defined in `docs/store.md`. A PostgreSQL seed backup for that catalog is documented in `docs/postgres-seed-backup.md`. Authentication, session, cart persistence, and order-tracking direction is documented in `docs/auth-sessions-orders.md`.
 
-The initial frontend lives in `frontend/`. It is a React, Vite, and TypeScript application that can run locally with npm or as a production container for ECS.
+The initial frontend lives in `frontend/`. It is a React, Vite, and TypeScript application that can run locally with npm or as a production container for ECS. It currently includes customer sign-in/sign-up screens, customer cart/order views, and a separate store-owner dashboard backed by static seed data and client-side state.
 
 ```bash
 cd frontend
