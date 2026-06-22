@@ -1,0 +1,8 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: playground-shopping-cart-frontend:local
+    ports:
+      - "5173:8080"

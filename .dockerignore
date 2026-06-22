@@ -1,0 +1,11 @@
+.git
+.gitignore
+**/.DS_Store
+**/node_modules
+**/dist
+**/coverage
+**/*.log
+config/postgres-seed-backup.local.env
+infra/terraform/.terraform
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*

@@ -24,6 +24,23 @@ Playground Shopping Cart is an experimental microservices project for comparing 
 
 The initial store catalog is defined in `docs/store.md`. A PostgreSQL seed backup for that catalog is documented in `docs/postgres-seed-backup.md`.
 
+The initial frontend lives in `frontend/`. It is a React, Vite, and TypeScript application that can run locally with npm or as a production container for ECS.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Build the ECS-oriented container image from the repository root:
+
+```bash
+docker build -f frontend/Dockerfile -t playground-shopping-cart-frontend:local .
+docker run --rm -p 5173:8080 playground-shopping-cart-frontend:local
+```
+
+The frontend container listens on port `8080` and exposes `/health` for ECS and load balancer health checks. See `docs/frontend-ecs.md` for the ECS container settings.
+
 ## Candidate Stack
 
 The exact stack is intentionally open so experiments can compare technologies. Initial candidates:
