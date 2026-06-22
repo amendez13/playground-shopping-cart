@@ -51,6 +51,25 @@ Rationale:
 - TypeScript is important because the UI will consume service APIs and experiment result schemas.
 - Next.js is not the default choice unless the project later needs server-side rendering, auth-heavy app routing, or backend-for-frontend behavior.
 
+## Database Decision
+
+Use PostgreSQL as the primary database for persisted store state.
+
+In this playground, PostgreSQL should run as a container by default:
+
+- Local development: run PostgreSQL as a Docker Compose service.
+- AWS playground deployment: run PostgreSQL as its own ECS service or task.
+- Persistent storage is optional and should be added only when an experiment needs state across restarts.
+- RDS or Aurora PostgreSQL may be added later as a comparison point, but they are not the default.
+
+Rationale:
+
+- The project is a playground, not a production system, so managed database concerns such as backups, failover, patching, and recovery are not the main driver.
+- Running PostgreSQL as a container keeps the database inside the same container and ECS learning surface as the application services.
+- A containerized database makes it easier to explore service discovery, networking, volumes, health checks, metrics, and operational behavior.
+- PostgreSQL still gives realistic database behavior for transactions, indexes, concurrent synthetic users, and performance experiments.
+- SQLite may be used for lightweight tests, fixtures, or throwaway prototypes, but it is not the project database.
+
 ## Documentation Guidance
 
 - Capture major decisions in `docs/decisions/`.
