@@ -22,6 +22,8 @@ Playground Shopping Cart is an experimental microservices project for comparing 
 - `experiments/`: Workloads, scenarios, raw results, and analysis notebooks or scripts.
 - `docs/`: Design notes, architecture decisions, and operating guides.
 
+The initial store catalog is defined in `docs/store.md`.
+
 ## Candidate Stack
 
 The exact stack is intentionally open so experiments can compare technologies. Initial candidates:
@@ -41,4 +43,3 @@ The exact stack is intentionally open so experiments can compare technologies. I
 4. Add baseline instrumentation and service-level metrics.
 5. Create Terraform modules for the first ECS deployment.
 6. Define benchmark scenarios and result schemas.
-
