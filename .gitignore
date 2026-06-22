@@ -1,0 +1,45 @@
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Logs and local env
+*.log
+.env
+.env.*
+!.env.example
+
+# Node/frontend
+node_modules/
+dist/
+build/
+.next/
+.svelte-kit/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Java
+target/
+.gradle/
+build/
+
+# Go
+bin/
+coverage.out
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
