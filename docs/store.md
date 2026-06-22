@@ -12,46 +12,64 @@ The first version of the store can model each book with:
 
 - `sku`: stable product identifier.
 - `title`: book title.
-- `authors`: book author or authors.
+- `authors`: array of book author names.
 - `category`: broad software engineering category.
-- `inventory`: current available stock count.
+- `tags`: search and filtering tags.
+- `price_cents`: product price in minor currency units.
+- `currency`: ISO 4217 currency code. Use `USD` for the initial catalog.
+- `inventory_count`: current available stock count.
+- `isbn`: ISBN-13 when available.
+- `publisher`: publisher name.
+- `publication_year`: publication year for the selected edition.
+- `page_count`: page count for the selected edition.
+- `format`: initial sellable format, such as `paperback` or `hardcover`.
+- `description`: short product description for catalog and detail views.
+- `popularity_weight`: simulator weighting from `1` to `10`, where higher values are sampled more often.
+- `restock_threshold`: inventory level where a restock simulation could be triggered later.
+- `active`: whether the product is currently listed and sellable.
+- `created_at`: seed creation timestamp.
+- `updated_at`: seed update timestamp.
 
 Inventory starts as a seeded playground value from `0` to `10`. These values are not meant to represent real availability. They exist so the cart service and simulator can exercise in-stock, low-stock, and out-of-stock behavior.
 
+The machine-readable seed catalog is maintained in `docs/catalog.seed.json`. The Markdown table below is a compact overview for humans.
+
+Book metadata is edition-specific seed data for the playground. Before using this catalog outside the project, verify ISBN, publisher, page count, and edition details against publisher or bookseller records.
+
 ## Initial Catalog
 
-| SKU | Title | Authors | Category | Inventory |
-| --- | --- | --- | --- | --- |
-| `book-001` | Code Complete | Steve McConnell | Programming Practice | 7 |
-| `book-002` | Clean Code | Robert C. Martin | Programming Practice | 4 |
-| `book-003` | The Pragmatic Programmer | Andrew Hunt, David Thomas | Programming Practice | 9 |
-| `book-004` | Refactoring | Martin Fowler | Code Quality | 2 |
-| `book-005` | Design Patterns | Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides | Software Design | 5 |
-| `book-006` | Patterns of Enterprise Application Architecture | Martin Fowler | Architecture | 3 |
-| `book-007` | Domain-Driven Design | Eric Evans | Architecture | 6 |
-| `book-008` | Working Effectively with Legacy Code | Michael Feathers | Code Quality | 1 |
-| `book-009` | Test-Driven Development: By Example | Kent Beck | Testing | 8 |
-| `book-010` | Continuous Delivery | Jez Humble, David Farley | Delivery | 4 |
-| `book-011` | Accelerate | Nicole Forsgren, Jez Humble, Gene Kim | Delivery | 10 |
-| `book-012` | Release It! | Michael T. Nygard | Reliability | 2 |
-| `book-013` | Designing Data-Intensive Applications | Martin Kleppmann | Distributed Systems | 7 |
-| `book-014` | Software Engineering at Google | Titus Winters, Tom Manshreck, Hyrum Wright | Engineering Practice | 6 |
-| `book-015` | A Philosophy of Software Design | John Ousterhout | Software Design | 3 |
-| `book-016` | The Mythical Man-Month | Frederick P. Brooks Jr. | Engineering Practice | 5 |
-| `book-017` | Peopleware | Tom DeMarco, Tim Lister | Engineering Management | 0 |
-| `book-018` | Site Reliability Engineering | Betsy Beyer, Chris Jones, Jennifer Petoff, Niall Richard Murphy | Reliability | 9 |
-| `book-019` | Building Microservices | Sam Newman | Architecture | 4 |
-| `book-020` | Monolith to Microservices | Sam Newman | Architecture | 1 |
-| `book-021` | Microservices Patterns | Chris Richardson | Architecture | 6 |
-| `book-022` | Head First Design Patterns | Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra | Software Design | 8 |
-| `book-023` | Effective Java | Joshua Bloch | Java | 3 |
-| `book-024` | Java Concurrency in Practice | Brian Goetz, Tim Peierls, Joshua Bloch, Joseph Bowbeer, David Holmes, Doug Lea | Java | 0 |
-| `book-025` | Fluent Python | Luciano Ramalho | Python | 5 |
-| `book-026` | Effective Python | Brett Slatkin | Python | 2 |
-| `book-027` | The Go Programming Language | Alan A. A. Donovan, Brian W. Kernighan | Go | 7 |
-| `book-028` | Concurrency in Go | Katherine Cox-Buday | Go | 4 |
-| `book-029` | You Don't Know JS Yet: Scope & Closures | Kyle Simpson | JavaScript | 6 |
-| `book-030` | Eloquent JavaScript | Marijn Haverbeke | JavaScript | 10 |
+| SKU | Title | Category | Price | Inventory | Popularity |
+| --- | --- | --- | --- | --- | --- |
+| `book-001` | Code Complete | Programming Practice | `$59.99` | 7 | 8 |
+| `book-002` | Clean Code | Programming Practice | `$49.99` | 4 | 9 |
+| `book-003` | The Pragmatic Programmer | Programming Practice | `$44.99` | 9 | 9 |
+| `book-004` | Refactoring | Code Quality | `$54.99` | 2 | 8 |
+| `book-005` | Design Patterns | Software Design | `$64.99` | 5 | 7 |
+| `book-006` | Patterns of Enterprise Application Architecture | Architecture | `$59.99` | 3 | 5 |
+| `book-007` | Domain-Driven Design | Architecture | `$64.99` | 6 | 7 |
+| `book-008` | Working Effectively with Legacy Code | Code Quality | `$49.99` | 1 | 8 |
+| `book-009` | Test-Driven Development: By Example | Testing | `$39.99` | 8 | 7 |
+| `book-010` | Continuous Delivery | Delivery | `$54.99` | 4 | 6 |
+| `book-011` | Accelerate | Delivery | `$29.99` | 10 | 8 |
+| `book-012` | Release It! | Reliability | `$49.99` | 2 | 6 |
+| `book-013` | Designing Data-Intensive Applications | Distributed Systems | `$54.99` | 7 | 10 |
+| `book-014` | Software Engineering at Google | Engineering Practice | `$49.99` | 6 | 7 |
+| `book-015` | A Philosophy of Software Design | Software Design | `$29.99` | 3 | 8 |
+| `book-016` | The Mythical Man-Month | Engineering Practice | `$34.99` | 5 | 5 |
+| `book-017` | Peopleware | Engineering Management | `$34.99` | 0 | 5 |
+| `book-018` | Site Reliability Engineering | Reliability | `$54.99` | 9 | 8 |
+| `book-019` | Building Microservices | Architecture | `$54.99` | 4 | 7 |
+| `book-020` | Monolith to Microservices | Architecture | `$39.99` | 1 | 6 |
+| `book-021` | Microservices Patterns | Architecture | `$59.99` | 6 | 7 |
+| `book-022` | Head First Design Patterns | Software Design | `$49.99` | 8 | 6 |
+| `book-023` | Effective Java | Java | `$54.99` | 3 | 8 |
+| `book-024` | Java Concurrency in Practice | Java | `$49.99` | 0 | 6 |
+| `book-025` | Fluent Python | Python | `$64.99` | 5 | 7 |
+| `book-026` | Effective Python | Python | `$39.99` | 2 | 6 |
+| `book-027` | The Go Programming Language | Go | `$44.99` | 7 | 7 |
+| `book-028` | Concurrency in Go | Go | `$39.99` | 4 | 5 |
+| `book-029` | You Don't Know JS Yet: Scope & Closures | JavaScript | `$29.99` | 6 | 6 |
+| `book-030` | Eloquent JavaScript | JavaScript | `$39.99` | 10 | 7 |
 
 ## Inventory Behavior
 
