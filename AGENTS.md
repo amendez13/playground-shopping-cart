@@ -32,9 +32,27 @@ This repository is a playground for learning and comparing microservice implemen
 - For performance experiments, record enough context to explain the result: service version, container config, ECS/Fargate configuration, workload shape, dataset, and metric window.
 - Terraform should be modular enough to support multiple experiment environments without duplicating entire stacks.
 
+## Frontend Stack Decision
+
+Use React with Vite and TypeScript for the common frontend unless a later decision record explicitly changes this.
+
+Recommended supporting libraries:
+
+- TanStack Query for API state and request lifecycle handling.
+- React Router or TanStack Router for application navigation.
+- Mantine for practical dashboard and form UI components.
+- Apache ECharts or Plotly for experiment and performance visualizations.
+
+Rationale:
+
+- The frontend is expected to include operational dashboards, experiment result views, forms, control panels, and API clients for multiple services.
+- React has the broadest ecosystem for charts, tables, dashboards, component libraries, and API integration.
+- Vite keeps local development and build configuration lightweight.
+- TypeScript is important because the UI will consume service APIs and experiment result schemas.
+- Next.js is not the default choice unless the project later needs server-side rendering, auth-heavy app routing, or backend-for-frontend behavior.
+
 ## Documentation Guidance
 
 - Capture major decisions in `docs/decisions/`.
 - Keep benchmark methodology in `experiments/`.
 - Update the README when repository structure, stack choices, or setup commands change.
-
