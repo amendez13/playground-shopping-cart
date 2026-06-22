@@ -22,7 +22,7 @@ Playground Shopping Cart is an experimental microservices project for comparing 
 - `experiments/`: Workloads, scenarios, raw results, and analysis notebooks or scripts.
 - `docs/`: Design notes, architecture decisions, and operating guides.
 
-The initial store catalog is defined in `docs/store.md`.
+The initial store catalog is defined in `docs/store.md`. A PostgreSQL seed backup for that catalog is documented in `docs/postgres-seed-backup.md`.
 
 ## Candidate Stack
 
