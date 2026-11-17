@@ -1,0 +1,148 @@
+<mxfile host="drawio" version="24.7.17">
+  <diagram id="supervision-data-access" name="Supervision data access architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1820" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;Supervision data access: HMI micro frontend, Keycloak, and user-facing Supervision Data API&lt;/b&gt; (illustrative proposal)" style="text;html=1;align=left;verticalAlign=middle;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Users -->
+        <mxCell id="users" value="Users" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#666666;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="200" width="120" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="uadmin" value="e.g. c-admin&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Service System: all&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="65" y="240" width="30" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uuser" value="e.g. go-user&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Service System: listed&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="65" y="340" width="30" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Browser / HMI -->
+        <mxCell id="browser" value="Browser — HMI (Angular shell / host)" style="rounded=1;align=left;spacingLeft=10;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="180" y="130" width="300" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="mfe" value="&lt;b&gt;Supervision micro frontend&lt;/b&gt;&lt;br&gt;Angular + TypeScript&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;no tokens: HttpOnly session cookie only;&lt;br&gt;typed client generated from OpenAPI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="175" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="requi" value="&lt;b&gt;Service request UI&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;(other micro frontend)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="340" width="260" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Keycloak -->
+        <mxCell id="kc" value="&lt;b&gt;Keycloak&lt;/b&gt; — login page + token issuer (platform realm)&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;client &lt;i&gt;hmi-gateway&lt;/i&gt;: confidential (Traefik), auth code + PKCE&lt;br&gt;client &lt;i&gt;supervision-api&lt;/i&gt;: audience, technical role &lt;i&gt;read&lt;/i&gt;&lt;br&gt;business roles (c-admin, go-user, …) · token exchange (5)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="640" y="60" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Gateway / Ingress -->
+        <mxCell id="gw" value="&lt;b&gt;Reverse proxy / WAF&lt;br&gt;+ Traefik (API gateway)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;OIDC session · cookie → Bearer&lt;br&gt;JWT, audience, supervision-api:read&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="640" y="185" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ing" value="&lt;b&gt;Traefik (Ingress)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Ingress: /supervision/v1/*&lt;br&gt;→ ClusterIP Service&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="910" y="185" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Service System / broker -->
+        <mxCell id="svcsys" value="&lt;b&gt;Service System&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;allocation (out of scope)&lt;br&gt;owns user ↔ service mapping&lt;br&gt;+ business role → scope&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="480" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="broker" value="&lt;b&gt;AMQP 1.0 broker&lt;/b&gt;&lt;br&gt;durable queue(s)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="910" y="470" width="150" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Supervisor -->
+        <mxCell id="sup" value="Supervisor (M instances, Kubernetes)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f1f8f0;strokeColor=#82b366;verticalAlign=top;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="130" width="400" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="&lt;b&gt;Supervision Data API&lt;/b&gt; — user-facing, read-only&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;REST / HTTPS / JSON, versioned OpenAPI&lt;br&gt;re-validates JWT + supervision-api:read; no business-role logic&lt;br&gt;scope from the Service System (5): all · listed ids · 403, cached&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="175" width="340" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pg" value="&lt;b&gt;PostgreSQL&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;user service → provider,&lt;br&gt;parameter catalogue,&lt;br&gt;working state (no user ids,&lt;br&gt;no long-term history)&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="320" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="coll" value="&lt;b&gt;User-service supervision&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;user services 1…N distributed across instances&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="480" width="340" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Resource providers -->
+        <mxCell id="rp" value="&lt;b&gt;Resource providers 1…K&lt;/b&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=12;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1620" y="470" width="170" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- API sketch -->
+        <mxCell id="apinote" value="&lt;b&gt;Supervision Data API v1&lt;/b&gt; (ADR 0005, ADR 0006)&lt;br&gt;&lt;font face=&quot;Courier New&quot;&gt;GET /supervision/v1/user-services&lt;br&gt;GET /supervision/v1/user-services/{id}/parameters&lt;br&gt;GET /supervision/v1/user-services/{id}/series?parameters=&amp;amp;from=&amp;amp;to=&lt;/font&gt;&lt;br&gt;One caller-filtered collection for every role; not visible → 404.&lt;br&gt;Service System or token exchange down → 503 (never show all).&lt;br&gt;Thanos store missing → 200 with &quot;partial&quot;: true. Examples: list and graph sequence diagrams." style="shape=note;whiteSpace=wrap;html=1;size=14;align=left;spacingLeft=10;verticalAlign=top;fillColor=#fffde7;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="20" y="660" width="560" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="adrnote" value="&lt;b&gt;Decided:&lt;/b&gt; ADR 0005 adds this read-only public route (Supervisor owns the micro frontend; visibility from the Service System via token exchange). ADR 0006 keeps long-term history in Prometheus + Thanos (S3), read through Thanos Query. The visibility rule is still provisional." style="shape=note;whiteSpace=wrap;html=1;size=14;align=left;spacingLeft=10;fillColor=#f1f8e9;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="620" y="660" width="500" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Read path edges -->
+        <mxCell id="eu" value="" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="users" target="browser">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1b" value="1b. user signs in on the Keycloak login page (password / MFA)" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;strokeWidth=2;labelBackgroundColor=#ffffff;fontColor=#8a5a00;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="users" target="kc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="83" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="2. GET /supervision/v1/…&lt;br&gt;Cookie: session" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="mfe" target="gw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ejwks" value="1a. redirect to login&lt;br&gt;1c. code → tokens (session store)&lt;br&gt;JWKS" style="endArrow=block;startArrow=block;html=1;rounded=0;dashed=1;strokeColor=#d79b00;strokeWidth=2;fontColor=#8a5a00;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="gw" target="kc">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="95" y="0" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="3." style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="gw" target="ing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="4." style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="ing" target="api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="6. catalogue,&lt;br&gt;status" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="api" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Registration and collection edges -->
+        <mxCell id="r1" value="a. request service" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="requi" target="svcsys">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="b. publish&lt;br&gt;user service" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="svcsys" target="broker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="c. consume" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="broker" target="coll">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="d. store" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="coll" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="e. REST API&lt;br&gt;(HTTPS/JSON)" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="coll" target="rp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="thanos" value="&lt;b&gt;Prometheus + Thanos&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;history (days+): network disk,&lt;br&gt;blocks uploaded to S3&lt;br&gt;(platform observability)&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1620" y="165" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="7. history:&lt;br&gt;Thanos Query" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="api" target="thanos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" value="f. scrape /metrics/business&lt;br&gt;(per interval class)" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;dashed=1;strokeColor=#b85450;fontColor=#8a2f2a;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="thanos" target="coll">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1705" y="440" /><mxPoint x="1466" y="440" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5v" value="5. scope (all · listed · 403): token exchange +&lt;br&gt;GET /service-system/v1/user-services" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;strokeWidth=2;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="api" target="svcsys">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1194" y="440" /><mxPoint x="759" y="440" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;1–7&lt;/b&gt; user read path (bold) · &lt;b&gt;a–f&lt;/b&gt; registration, supervision, and history path · orange = login with Keycloak (1a–1c), run by Traefik; the browser holds only a session cookie" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="620" y="750" width="700" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,173 @@
+<mxfile host="drawio" version="24.7.17">
+  <diagram id="user-service-supervision" name="User service supervision registration">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;User service registration and distributed supervision&lt;/b&gt; (illustrative proposal)" style="text;html=1;align=left;verticalAlign=middle;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Users -->
+        <mxCell id="users" value="Users (many, several kinds)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#666666;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="200" width="130" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="userA" value="User type A" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="240" width="30" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="userB" value="User type B" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="335" width="30" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="userN" value="User type N" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="430" width="30" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- HMI -->
+        <mxCell id="hmi" value="&lt;b&gt;HMI&lt;/b&gt;&lt;br&gt;select and request a service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="320" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Service System -->
+        <mxCell id="svcsys" value="&lt;b&gt;Service System&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;internals acknowledged, out of scope&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="440" y="210" width="210" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ctl" value="Control" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bbbbbb;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="465" y="265" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="match" value="Matchmaking" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bbbbbb;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="465" y="320" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="resalloc" value="Resource allocation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bbbbbb;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="465" y="375" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pool" value="Resource pooling" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bbbbbb;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="465" y="430" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- AMQP broker -->
+        <mxCell id="broker" value="&lt;b&gt;AMQP 1.0 message broker&lt;/b&gt;&lt;br&gt;durable queue(s)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="740" y="315" width="150" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Supervisor deployment -->
+        <mxCell id="sup" value="Supervisor — M instances&lt;br&gt;&lt;font style=&quot;font-size:10px;font-weight:normal&quot;&gt;user services 1…N distributed across instances; one owner per user service at a time&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f1f8f0;strokeColor=#82b366;verticalAlign=top;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="960" y="70" width="380" height="620" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inst1" value="Supervisor instance 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="990" y="120" width="320" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="us1" value="User service 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="150" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="us4" value="User service 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="190" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="us7" value="User service 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="230" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inst2" value="Supervisor instance 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="990" y="300" width="320" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="us2" value="User service 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="330" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="us5" value="User service 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="370" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="us8" value="User service 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="410" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dots1" value="⋮" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="460" width="60" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="instM" value="Supervisor instance M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="990" y="510" width="320" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="us3" value="User service 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="540" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="us6" value="User service 6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="580" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="usN" value="User service N" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="620" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Resource providers -->
+        <mxCell id="rphdr" value="&lt;b&gt;Resource providers (K)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="90" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rp1" value="&lt;b&gt;Resource provider 1&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="140" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rp2" value="&lt;b&gt;Resource provider 2&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="270" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rp3" value="&lt;b&gt;Resource provider 3&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="400" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dots2" value="⋮" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="480" width="60" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="rpK" value="&lt;b&gt;Resource provider K&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="540" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Flow edges -->
+        <mxCell id="e1" value="1. select service" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="users" target="hmi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="2. request" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="hmi" target="svcsys">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="3. publish&lt;br&gt;allocated&lt;br&gt;user service" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="svcsys" target="broker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3b" value="4. consume&lt;br&gt;(register)" style="endArrow=block;html=1;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="broker" target="sup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- REST edges: user service -> its resource provider -->
+        <mxCell id="r1" style="endArrow=block;html=1;rounded=0;strokeColor=#6c8ebf;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us1" target="rp1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us4" target="rp2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" style="endArrow=block;html=1;rounded=0;strokeColor=#b85450;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us7" target="rpK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us2" target="rp2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" style="endArrow=block;html=1;rounded=0;strokeColor=#6c8ebf;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us5" target="rp1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" style="endArrow=block;html=1;rounded=0;strokeColor=#9673a6;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us8" target="rp3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" style="endArrow=block;html=1;rounded=0;strokeColor=#9673a6;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us3" target="rp3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" style="endArrow=block;html=1;rounded=0;strokeColor=#b85450;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="us6" target="rpK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rN" style="endArrow=block;html=1;rounded=0;strokeColor=#6c8ebf;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="usN" target="rp1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="resthdr" value="5. REST API&lt;br&gt;(HTTPS/JSON)" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="80" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Colour = resource provider the user service is allocated to" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="640" width="340" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
