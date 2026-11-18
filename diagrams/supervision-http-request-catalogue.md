@@ -42,13 +42,17 @@ Each call has two hops: the browser sends the session cookie to Traefik, and Tra
 | H15 | `GET /metrics/business` | Scrape of the latest business values in Prometheus exposition format; private, never publicly routed. | Prometheus | Supervisor | `interval` (`10s`, `60s`, or `300s`; one scrape job each) |
 | H16 | `GET /api/v1/query_range` | Range query for the chart, with PromQL built by the Supervisor from allowlisted ids. | Supervisor | Thanos Query | `query`, `start`, `end`, `step`, `max_source_resolution`, `partial_response` |
 
-## Registration
+## Service registration and request
 
 | ID | Method and path | Description | Sender | Receiver | Parameters |
 |---|---|---|---|---|---|
-| H17 | Service System UI (not defined here) | The resource provider registers a user service with its endpoint and supervision parameters. Owned by the Service System. | Browser (RP operator) | Service System | Provider, endpoint, parameter list (id, unit, collection interval) |
+| H17 | Service System UI (not defined here) | The resource provider registers a service with its endpoint and supervision parameters. Owned by the Service System. | Browser (RP operator) | Service System | Provider, endpoint, parameter list (id, unit, collection interval) |
+| H18 | Service request UI (not defined here) | A user requests a registered service for a start and an end datetime. Owned by the Service System. | Browser (HMI user) | Service System | Service id, start datetime, end datetime; returns the assigned `userServiceId` |
+| H19 | Service request UI (not defined here) | The user cancels a requested user service, before or during its period. Owned by the Service System. | Browser (HMI user) | Service System | `userServiceId` |
 
-The Service System then notifies the Supervisor with the `UserServiceRegistered` message over AMQP, which is not HTTP and is not listed here.
+At the start datetime the Service System instantiates the user service and notifies the Supervisor with `UserServiceRegistered`; at the end datetime or on cancellation it removes it and sends `UserServiceDeregistered`. These are AMQP messages, not HTTP, and are not listed here.
+
+Whether H08–H10 still return an ended or cancelled user service while its history is retained is open.
 
 ## Not listed
 
@@ -60,3 +64,4 @@ Operational endpoints (`GET /health/ready`, `GET /health/live`, and the technica
 - [List user services sequence](list-my-user-services-sequence.md): H01–H08, H11, H12
 - [Parameter graph sequence](supervision-parameter-graph-sequence.md): H09, H10, H13, H15, H16
 - [User service registration storyboard](user-service-registration-storyboard.md): H14, H17
+- [Supervision data access architecture](supervision-data-access-architecture.md): H17, H18

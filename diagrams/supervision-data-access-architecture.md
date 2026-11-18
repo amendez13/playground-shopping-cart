@@ -19,9 +19,15 @@ Source: [supervision-data-access-architecture.drawio](supervision-data-access-ar
 6. The API reads the resource provider, status, and parameter catalogue from its PostgreSQL. PostgreSQL holds no user ids and no long-term history.
 7. For graphs, the API reads history from Thanos Query with PromQL it builds itself.
 
-## Registration, supervision, and history path (a–f)
+## Registration, request, supervision, and history path (a–f)
 
-The Service System publishes each allocated user service to the AMQP broker, without owner data. The Supervisor consumes the message and supervises the user service through its resource provider's REST API. Prometheus scrapes the latest values from `GET /metrics/business`, one job per interval class, and Thanos keeps the history on network storage with blocks uploaded to S3.
+- a1. A resource provider (RP) operator registers a service in the Service System UI, with its endpoint and supervision parameters (id, unit, collection interval). The Service System holds this data.
+- a2. A user requests that service in the Service request UI, with a start and an end datetime. The Service System assigns the user service id at once; the user can cancel it at any time.
+- b. At the start datetime, the Service System instantiates the user service (for example US-1001) and publishes it to the AMQP broker, through a transactional outbox, without owner data or credentials. The message carries the provider, endpoint, connection profile name, and parameter list, versioned by revision; later changes are new revisions. At the end datetime, or when the user cancels, the Service System removes the user service and publishes `UserServiceDeregistered`; the Supervisor stops collecting it. A request cancelled before its start never reaches the Supervisor.
+- c. A Supervisor instance consumes the message and acknowledges it only after its database commit.
+- d. It upserts the user service by revision in PostgreSQL; one instance owns each user service and schedules collection per interval class (10 s, 60 s, 300 s).
+- e. Each due run polls the RP at the registered endpoint, with credentials from the RP's connection profile (Kubernetes Secret, set up once per RP).
+- f. Prometheus scrapes the latest values from `GET /metrics/business`, one job per interval class, and Thanos keeps the history on network storage with blocks uploaded to S3.
 
 ## API resources
 
@@ -38,4 +44,6 @@ The Service System publishes each allocated user service to the AMQP broker, wit
 - Micro frontend asset hosting.
 - Thanos retention, Sidecar or Receive, and Supervisor authentication to Thanos Query.
 - Pagination and rate limits.
+- Who provisions RP connection profiles.
+- Whether an ended or cancelled user service stays listed and chartable while its history is retained.
 - The Traefik OIDC component, session store, session lifetime with polling, CSRF policy, and back-channel logout.
